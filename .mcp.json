@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "velixir": {
-      "command": "npx",
-      "args": ["-y", "@velixir/mcp@0.3.1"],
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/node_modules/@velixir/mcp/src/index.js"],
       "env": {
         "VELIXIR_API_KEY": "${user_config.velixir_api_key}"
       }

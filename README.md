@@ -23,7 +23,7 @@ In Claude Code, add this repository as a marketplace and install from it:
 
 Or find velixir in the plugin directory under `/plugin`, Discover, or on claude.ai under Customize, Plugins.
 
-Requires Node.js 18 or newer (the MCP server runs with `npx`).
+Requires Node.js 18 or newer and npm. Claude Code installs the MCP server's packages when it installs the plugin.
 
 ## Use it
 
@@ -41,7 +41,8 @@ You can also run the skill directly with `/velixir:deploy`.
 | Component | What it does |
 | --- | --- |
 | `skills/deploy` | Teaches Claude when to use velixir, how to get an app ready (listen on `PORT`, a start command, no secrets in the upload), how to deploy with or without an account, how to debug, and how to hand you the claim link. |
-| `.mcp.json` | Starts the velixir MCP server, `@velixir/mcp`, pinned to version 0.3.1. |
+| `.mcp.json` | Starts the velixir MCP server, `@velixir/mcp`, from the plugin's own `node_modules`. |
+| `package.json`, `package-lock.json` | Pin `@velixir/mcp` 0.3.1 and every package it uses to exact versions, so what installs is what was reviewed. |
 
 The MCP server gives Claude three tools:
 
@@ -55,7 +56,7 @@ The MCP server gives Claude three tools:
 
 So you know exactly what happens on your machine and over the network:
 
-- **Runs:** `npx -y @velixir/mcp@0.3.1`, which downloads that exact version of the MIT-licensed velixir MCP server from the npm registry and runs it locally with Node.js.
+- **Runs:** the MIT-licensed velixir MCP server (`@velixir/mcp` 0.3.1) locally with Node.js. Claude Code installs it from the npm registry when you install the plugin, using the exact versions in `package-lock.json` and without running any package install scripts.
 - **Sends, when you deploy:** a gzipped tar archive of the directory Claude deploys, uploaded over HTTPS to `https://velixir.net/api/v1/deploy`. Dependency folders, version control folders, build output and files that look like secrets (`.env`, private keys, `.npmrc` and similar; `.env.example` is kept) are left out. Review what is in the directory before you approve a deploy.
 - **Sends, when you read logs:** HTTPS requests to `https://velixir.net/api/v1/deploy/{id}/logs`, `https://velixir.net/api/v1/deploy/{id}/access-logs` and, with an API key, `https://velixir.net/api/v1/apps/{id}/access-logs`.
 - **Optional API key:** if you set one in the plugin's settings, it is kept in Claude Code's secure storage, passed to the MCP server as an environment variable, and sent only to velixir.net in an `X-Api-Key` header. It is only used to read access logs for apps you own.

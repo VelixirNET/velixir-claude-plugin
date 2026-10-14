@@ -1,0 +1,9 @@
+{
+  "name": "velixir-claude-plugin",
+  "private": true,
+  "description": "Runtime dependency of the velixir Claude Code plugin: the velixir MCP server, pinned by package-lock.json. Claude Code installs it when the plugin is installed.",
+  "license": "MIT",
+  "dependencies": {
+    "@velixir/mcp": "0.3.1"
+  }
+}

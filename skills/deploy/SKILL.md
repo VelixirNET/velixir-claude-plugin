@@ -77,8 +77,8 @@ Until it is claimed, the app is a short-lived preview: it lives only until the c
 Use the velixir CLI from the terminal. Never ask the user to paste an API key into the chat, and never put a key in a command line or file yourself.
 
 1. **Check it is installed:** `velixir version`. If not:
-   - macOS or Linux: `curl -fsSL https://velixir.net/install.sh | sh` (installs to `~/.velixir/bin`)
-   - Windows, or anywhere with the .NET SDK: `dotnet tool install --global Velixir.Cli`
+   - With the .NET SDK installed: `dotnet tool install --global Velixir.Cli` (check first with `dotnet --version`).
+   - Otherwise, don't download and run an install script yourself. Ask the user to install the CLI by following https://velixir.net/docs/cli, then continue.
 2. **Sign in:** the user runs `velixir login` themselves, because it opens a browser to approve. In Claude Code they can type `! velixir login`. Check with `velixir doctor`.
 3. **Pick the app:** `velixir apps` lists app IDs. If the directory already has a `.velixir.json`, it is linked. Otherwise link it with `velixir init --app <id>`. Creating a brand new app with `velixir init` asks questions (name, project, plan), so ask the user to run it themselves, or create the app in the dashboard, or use path A and have them claim it.
 4. **Deploy:** `velixir deploy` from the app directory, or `velixir deploy --app <id> --source-dir <dir>`. It packages the source, uploads it, and streams the build until the deploy is healthy or fails. Add `--slot <name>` for a staging slot.
