@@ -1,0 +1,17 @@
+{
+  "name": "velixir",
+  "description": "The velixir plugin for Claude Code: deploy apps in any language to the EU and debug them from your agent.",
+  "owner": {
+    "name": "velixir",
+    "email": "hello@velixir.net"
+  },
+  "plugins": [
+    {
+      "name": "velixir",
+      "source": "./",
+      "description": "Deploy web apps in any language to velixir, get a live URL and a claim link, and read logs to debug them.",
+      "category": "deployment",
+      "homepage": "https://velixir.net/ai"
+    }
+  ]
+}
